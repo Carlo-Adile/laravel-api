@@ -14,6 +14,9 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
+    public function handlePostman(){
+        return redirect()->to('https://www.postman.com/spacecraft-technologist-84412807/workspace/boolfolio/request/33713509-aab3e5fd-8432-4f01-beb2-7211de2d6315?ctx=documentation');
+    }
     /**
      * Display a listing of the resource.
      */

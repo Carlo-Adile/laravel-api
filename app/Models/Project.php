@@ -13,8 +13,9 @@ class Project extends Model
 
     protected $fillable = ['title', 'slug', 'content', 'cover_image', 'type_id'];
 
+    /* relazione one to many (un progetto appartiene a un type, un type può avere molti progetti) */
     /**
-     * Get the user that owns the Project
+     * Get the type that owns the Project
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -23,6 +24,7 @@ class Project extends Model
         return $this->belongsTo(Type::class);
     }
 
+    /* relazione many to many (i progetti hanno molte tecnologie; le tecnologie appartengono a molti progetti) */
     public function technologies(): BelongsToMany {
         return $this->belongsToMany(Technology::class);
     }
