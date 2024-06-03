@@ -11,7 +11,7 @@ class Project extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'slug', 'content', 'cover_image', 'type_id'];
+    protected $fillable = ['title', 'slug', 'content', 'cover_image', 'type_id', 'technology_id'];
 
     /* relazione one to many (un progetto appartiene a un type, un type può avere molti progetti) */
     /**
@@ -25,7 +25,8 @@ class Project extends Model
     }
 
     /* relazione many to many (i progetti hanno molte tecnologie; le tecnologie appartengono a molti progetti) */
-    public function technologies(): BelongsToMany {
+    public function technologies(): BelongsToMany
+    {
         return $this->belongsToMany(Technology::class);
     }
 }

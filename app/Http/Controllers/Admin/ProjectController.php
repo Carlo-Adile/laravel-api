@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
-    public function handlePostman(){
+    public function handlePostman()
+    {
         return redirect()->to('https://www.postman.com/spacecraft-technologist-84412807/workspace/boolfolio/request/33713509-aab3e5fd-8432-4f01-beb2-7211de2d6315?ctx=documentation');
     }
     /**
@@ -49,7 +50,7 @@ class ProjectController extends Controller
         $slug = Str::slug($request->title, '-');
         $validated['slug'] = $slug;
 
-        if($request->has('cover_image')) {
+        if ($request->has('cover_image')) {
             $image_path = Storage::put('uploads', $validated['cover_image']);
             $validated['cover_image'] = $image_path;
         }
@@ -58,13 +59,13 @@ class ProjectController extends Controller
         /* Project::create($validated); */
 
         /* $technologies = Technology::all(); */
-        
+
         $project = Project::create($validated);
 
-        if($request->has('technologies')) {
+        if ($request->has('technologies')) {
             $project->technologies()->attach($validated['technologies']);
         }
-        
+
         /* redirect */
         return to_route('admin.projects.index')->with('message', "Project $request->title created correctly");
     }
@@ -101,8 +102,8 @@ class ProjectController extends Controller
         $validated['slug'] = $slug;
 
         /* usa public storage */
-        if($request->has('cover_image')) {
-            if($project->cover_image){
+        if ($request->has('cover_image')) {
+            if ($project->cover_image) {
                 Storage::delete($project->cover_image);
             }
             $image_path = Storage::put('uploads', $validated['cover_image']);
@@ -123,8 +124,8 @@ class ProjectController extends Controller
      * Remove the specified resource from storage.
      */
     public function destroy(Project $project)
-    {   
-        if($project->cover_image){
+    {
+        if ($project->cover_image) {
             Storage::delete($project->cover_image);
         }
 
