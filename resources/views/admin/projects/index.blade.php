@@ -12,7 +12,7 @@
 				Add a new project
 				<i class="fa-solid fa-pencil"></i>
 			</a>
-			
+
 		</div>
 	</header>
 
@@ -51,11 +51,6 @@
 									<a href="{{ route('admin.projects.edit', $project) }}" class="btn">
 										<i class="fa-solid fa-pencil"></i>
 									</a>
-
-
-
-
-
 
 									{{-- bs5-modal-default --}}
 									<button type="button" class="btn btn-lg" data-bs-toggle="modal" data-bs-target="#modal-{{ $project->id }}">
