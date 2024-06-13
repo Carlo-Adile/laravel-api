@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Project;
+use App\Models\Type;
 
 
 class ProjectController extends Controller
@@ -36,7 +37,23 @@ class ProjectController extends Controller
                 'response' => '404 Sorry nothing found!'
             ]);
         }
+    }
+    public function filtered()
+    {
+        //passa i projects filtrati
+        if (request()->has('type_id')) {
+            $projects = Project::with('technologies', 'type')
+                ->where('type_id', request()->input('type_id'))
+                ->orderByDesc('id')
+                ->paginate(6);
 
+            return response()->json([
+                'success' => true,
+                'projects' => $projects
+            ]);
+        } else {
+            return $this->index();
+        }
     }
     public function latest()
     {
